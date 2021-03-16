@@ -12,22 +12,22 @@ import (
 	"google.golang.org/api/drive/v3"
 )
 
-// func createFolder(service *drive.Service, name string, parentId string) (*drive.File, error) {
-// 	d := &drive.File{
-// 		Name:     name,
-// 		MimeType: "application/vnd.google-apps.folder",
-// 		Parents:  []string{parentId},
-// 	}
+func createFolder(service *drive.Service, name string, parentId string) (*drive.File, error) {
+	d := &drive.File{
+		Name:     name,
+		MimeType: "application/vnd.google-apps.folder",
+		Parents:  []string{parentId},
+	}
 
-// 	file, err := service.Files.Create(d).Do()
+	file, err := service.Files.Create(d).Do()
 
-// 	if err != nil {
-// 		log.Println("Could not create dir: " + err.Error())
-// 		return nil, err
-// 	}
+	if err != nil {
+		log.Println("Could not create dir: " + err.Error())
+		return nil, err
+	}
 
-// 	return file, nil
-// }
+	return file, nil
+}
 
 func createFile(service *drive.Service, name string, mimeType string, content io.Reader, parentId string) (*drive.File, error) {
 	f := &drive.File{
@@ -70,11 +70,11 @@ func main() {
 		log.Fatalf("Unable to retrieve drive Client %v", err)
 	}
 
-	// Create directory
-	// dir, err := createFolder(srv, "New Folder", "root")
-	// if err != nil {
-	// 	panic(fmt.Sprintf("Could not create dir: %v\n", err))
-	// }
+	// Create folder
+	//dir, err := createFolder(srv, "New Folder", "root")
+	//if err != nil {
+	//	panic(fmt.Sprintf("Could not create dir: %v\n", err))
+	//}
 
 	//give your folder id here in which you want to upload or create new directory
 	folderId := "1rQq4sE3JYLDXdtRuM7iW6fhmGzVI1LwQ"
@@ -85,8 +85,10 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("Could not create file: %v\n", err))
 	}
-	files , errFiles := getFiles(srv)
-	if errFiles != nil {
+	
+	//get files
+	files , err := getFiles(srv)
+	if err != nil {
 		panic(fmt.Sprintf("Could not create file: %v\n", err))
 	}
 
@@ -95,7 +97,7 @@ func main() {
 		panic (err)
 	}
 	fmt.Printf("File '%s' udah ke upload", file.Name)
-	fmt.Printf("Files '%s'get files cuy", out)
 	fmt.Printf("\nFile Id: '%s' ", file.Id)
+	fmt.Printf("Files '%s'get files cuy", out)
 
 }
