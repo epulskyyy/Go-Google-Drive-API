@@ -9,6 +9,7 @@ done ,
 trus ke klik email yg belakangnya iam.gserviceaccount.com trus ke keys -> add key pilih yg .json
 abis itu ke download
 
+hasil json terdapat client_email -> copy paste pada link folder google drive
 nah hasil download isinya masukin ke client_secret.json timpa aja
 
 baru dah jalanin  
